@@ -1,0 +1,10 @@
+<div class="scratch-card-container">
+    <div class="scratch-card" *ngFor="let card of cardList;">
+
+        <scratch-card [id]="card.cardId" [scratch-type]="card.scratchType" [secret-image]="card.imageBackgroundSrc" [cover-image]="card.imageForwardSrc"
+            [canvas-height]="card.containerHeight" [canvas-width]="card.containerWidth" [clear-zone-radius]="card.clearZoneRadius"
+            [n-points]="card.nPoints" [point-size]="card.pointSize" (scratch-completed)="scratchCompleted(card)" (scratching)="scratching($event, card)">
+        </scratch-card>
+
+    </div>
+</div>

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
+import { Component, AfterViewInit, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { ScratchCard, SCRATCH_TYPE } from 'scratchcard-js';
 
 @Component({
@@ -7,7 +7,10 @@ import { ScratchCard, SCRATCH_TYPE } from 'scratchcard-js';
     styleUrls: ['/src/components/scratch-card/scratch-card.component.scss']
 })
 
-export class ScratchCardComponent implements OnInit, OnDestroy {
+export class ScratchCardComponent implements AfterViewInit, OnDestroy {
+
+    @Input('id')
+    id: number;
 
     @Input('scratch-type')
     scratchType: any;
@@ -39,11 +42,11 @@ export class ScratchCardComponent implements OnInit, OnDestroy {
     @Output('scratching')
     scratching: EventEmitter<any> = new EventEmitter();
 
-    private uniqueId: number;
     private scratchCardInstance = null;
+
     constructor() { }
 
-    ngOnInit() {
+    ngAfterViewInit() {
         this.initializeCanvas();
     }
 
@@ -67,8 +70,16 @@ export class ScratchCardComponent implements OnInit, OnDestroy {
             callback: () => this.scratchCompleted.emit()
         };
 
-        this.scratchCardInstance = new ScratchCard('.scratch_container', scOptions);
+        const scratchContainerId = '#scratch_container_' + this.id;
+        // let x = document.querySelector(scratchContainerId)
+        // console.log('Found :', x);
+        this.scratchCardInstance = new ScratchCard(scratchContainerId, scOptions);
         this.scratchCardInstance.init().then(() => {
+
+            const img = document.querySelector(scratchContainerId + '>img');
+            if (img) {
+                console.log(img);
+            }
 
             this.scratchCardInstance.canvas.addEventListener('scratch.move', () => {
                 let percent = this.scratchCardInstance.getPercent().toFixed(2)
