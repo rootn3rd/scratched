@@ -1,7 +1,8 @@
 <ion-content>
   <div class="scratch-card">
     <scratch-card [scratch-type]="scratchCardOptions.scratchType" [secret-image]="scratchCardOptions.imageBackgroundSrc" [cover-image]="scratchCardOptions.imageForwardSrc"
-      [clear-zone-radius]="scratchCardOptions.clearZoneRadius" [n-points]="scratchCardOptions.nPoints" [point-size]="scratchCardOptions.pointSize"
-      (scratch-completed)="scratchCompleted()" (scratching)="scratching($event)"></scratch-card>
+      [canvas-height]="scratchCardOptions.containerHeight" [canvas-width]="scratchCardOptions.containerWidth" [clear-zone-radius]="scratchCardOptions.clearZoneRadius"
+      [n-points]="scratchCardOptions.nPoints" [point-size]="scratchCardOptions.pointSize" (scratch-completed)="scratchCompleted()"
+      (scratching)="scratching($event)"></scratch-card>
   </div>
 </ion-content>

@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { ScratchCard, SCRATCH_TYPE } from 'scratchcard-js';
-import { INFERRED_TYPE } from '@angular/compiler/src/output/output_ast';
 
 @Component({
     selector: 'scratch-card',
@@ -8,12 +7,16 @@ import { INFERRED_TYPE } from '@angular/compiler/src/output/output_ast';
     styleUrls: ['/src/components/scratch-card/scratch-card.component.scss']
 })
 
-export class ScratchCardComponent implements OnInit {
-
-    @ViewChild("scratch_container") scratchContainer: ElementRef;
+export class ScratchCardComponent implements OnInit, OnDestroy {
 
     @Input('scratch-type')
     scratchType: any;
+
+    @Input('canvas-height')
+    canvasHeight: number;
+
+    @Input('canvas-width')
+    canvasWidth: number;
 
     @Input('secret-image')
     secretImage: string;
@@ -52,11 +55,10 @@ export class ScratchCardComponent implements OnInit {
 
     initializeCanvas() {
 
-        const scContainer = this.scratchContainer.nativeElement;
         const scOptions = {
             scratchType: this.scratchType || SCRATCH_TYPE.CIRCLE,
-            containerWidth: scContainer.offsetWidth,
-            containerHeight: 300,
+            containerWidth: this.canvasWidth || 300,
+            containerHeight: this.canvasHeight || 300,
             imageForwardSrc: this.coverImage || 'assets/img/scratchcard.jpg',
             imageBackgroundSrc: this.secretImage || 'assets/img/result.png',
             clearZoneRadius: this.clearZoneRadius || 40,

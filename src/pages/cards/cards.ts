@@ -12,6 +12,8 @@ export class CardsPage {
   constructor(public navCtrl: NavController) {
 
     this.scratchCardOptions = {
+      containerWidth: 350,
+      containerHeight: 350,
       scratchType: 2, //0: BRUSH,1:SPRAY,2: CIRCLE
       imageForwardSrc: 'assets/img/scratchcard.jpg',
       imageBackgroundSrc: 'assets/img/result.png',
