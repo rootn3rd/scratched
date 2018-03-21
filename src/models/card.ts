@@ -1,6 +1,8 @@
 export class Card {
     cardId: number;
     cardName: string;
+    cardType: CARD_TYPE;
+    cardMessage: string;
     containerWidth: number;
     containerHeight: number;
     scratchType: SCRATCH_TYPE;
@@ -9,6 +11,11 @@ export class Card {
     clearZoneRadius: number;
     nPoints: number;
     pointSize: number;
+}
+
+export enum CARD_TYPE {
+    Image = <any>"Image",
+    Text = <any>"Text"
 }
 
 export enum SCRATCH_TYPE {

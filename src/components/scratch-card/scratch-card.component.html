@@ -1,1 +1,9 @@
-<div #scratch_container [attr.id]="'scratch_container_' + id" class="scratch_container"></div>
+<div #scratch_container [attr.id]="'scratch_container_' + id" class="scratch_container" [ngClass]="{'text-container' : (cardType && cardType === 'Text')}">
+    <div class='square-box' *ngIf="cardType && cardType === 'Text'" [style.width]="canvasWidth+'px'" [style.height]="canvasHeight+'px'">
+        <div class='square-content'>
+            <div>
+                <span [innerHTML]="cardMessage" class="card-message"></span>
+            </div>
+        </div>
+    </div>
+</div>

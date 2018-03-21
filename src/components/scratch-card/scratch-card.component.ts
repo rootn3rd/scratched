@@ -1,5 +1,7 @@
 import { Component, AfterViewInit, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { ScratchCard, SCRATCH_TYPE } from 'scratchcard-js';
+import { CARD_TYPE } from '../../models/card';
+
 
 @Component({
     selector: 'scratch-card',
@@ -42,6 +44,12 @@ export class ScratchCardComponent implements AfterViewInit, OnDestroy {
     @Output('scratching')
     scratching: EventEmitter<any> = new EventEmitter();
 
+    @Input('card-type')
+    cardType: CARD_TYPE;
+
+    @Input('card-message')
+    cardMessage: string;
+
     private scratchCardInstance = null;
 
     constructor() { }
@@ -56,6 +64,14 @@ export class ScratchCardComponent implements AfterViewInit, OnDestroy {
         }
     }
 
+    getImageBackgroundSrc() {
+        let image = 'assets/img/result.png';
+        if (this.cardType && this.secretImage) {
+            image = (this.cardType == CARD_TYPE.Image ? this.secretImage : 'assets/img/transparent.png')
+        }
+        return image;
+    }
+
     initializeCanvas() {
 
         const scOptions = {
@@ -63,7 +79,7 @@ export class ScratchCardComponent implements AfterViewInit, OnDestroy {
             containerWidth: this.canvasWidth || 300,
             containerHeight: this.canvasHeight || 300,
             imageForwardSrc: this.coverImage || 'assets/img/scratchcard.jpg',
-            imageBackgroundSrc: this.secretImage || 'assets/img/result.png',
+            imageBackgroundSrc: this.getImageBackgroundSrc(),
             clearZoneRadius: this.clearZoneRadius || 40,
             nPoints: 2,
             pointSize: 1,

@@ -23,6 +23,6 @@ export class CardsListComponent implements OnInit {
     }
 
     scratching(event, card) {
-        console.log('Scratching percent :', event.percent, card);
+        // console.log('Scratching percent :', event.percent, card);
     }
 }

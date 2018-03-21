@@ -18,7 +18,7 @@ export class CardsPage implements OnInit {
   ngOnInit() {
     this.cardsApi.getCards().subscribe(list => {
       console.log('Cards fetched!');
-      this.cardList = [].concat([list[0]]);
+      this.cardList = list;// [].concat([list[0]]);
     });
   }
 }

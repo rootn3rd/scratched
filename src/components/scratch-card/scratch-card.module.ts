@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
-
+import { CommonModule } from '@angular/common';
 import { ScratchCardComponent } from './scratch-card.component';
 
 @NgModule({
-    imports: [],
-    exports: [ScratchCardComponent],
+    imports: [CommonModule],
+    exports: [CommonModule, ScratchCardComponent],
     declarations: [ScratchCardComponent],
     providers: [],
 })
